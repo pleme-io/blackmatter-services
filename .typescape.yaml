@@ -1,0 +1,23 @@
+schema_version: 1
+manifest:
+  name: blackmatter-services
+  kind: BlackmatterComponent
+  archetype: blackmatter-component-hm-nixos
+  description: NixOS + home-manager microservice modules (daemons, scheduled tasks, health probes).
+dimensions:
+  vocabulary: [services, daemon, systemd, launchd, cron, health-probe]
+  domains: [Nix]
+  stack: [HomeManager, NixOS]
+  modules:
+    home_manager: module/home-manager/
+    nixos: module/nixos/
+  render:
+    produces:
+      - "systemd unit files (NixOS)"
+      - "launchd agent plists (Darwin via HM)"
+  compliance:
+    satisfies: []
+    participates: []
+  dag:
+    inputs: [nixpkgs, substrate]
+  attestation: { merkle_root: null, signed_by: null, producer: blackmatter-component-flake.nix }
